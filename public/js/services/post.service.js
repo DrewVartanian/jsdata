@@ -13,6 +13,7 @@ app.factory('Post', function(DS,$state) {
 				(HINT: see post.js)
 
 	*/
+  
   var Post = DS.defineResource({
     name: 'posts',
     relations: {
@@ -26,7 +27,6 @@ app.factory('Post', function(DS,$state) {
     methods: {
       go: function(){
         $state.go('post',{postId:this._id});
-        // $state.go('post',{'postId':this._id});
       }
     }
   });

@@ -6,13 +6,11 @@ app.config(function($stateProvider) {
 		url: '/signup',
 		templateUrl: 'js/signup/signup.html',
 		controller: 'SignupCtrl'
-	})
-})
+	});
+});
 
 // add necessary dependencies here
-app.controller('SignupCtrl', function($scope) {
-
-
+app.controller('SignupCtrl', function($scope, User, $state) {
   /*
   TODOS: 
   1 - create the signup object for ng-modelling
@@ -23,4 +21,18 @@ app.controller('SignupCtrl', function($scope) {
 
   */
 
-})
+  $scope.signup = {
+    username: null,
+    password: null
+  };
+
+  $scope.sendSignup = function(){
+    console.log($scope.signup);
+    User.create($scope.signup)
+    .then(function(){
+      console.log('created user');
+      $state.go('main')
+    });
+  };
+
+});

@@ -29,6 +29,7 @@ app.controller('PostCtrl', function($scope,Post,users,$stateParams, $state) {
 			return data;
 		});
 	};
+	$scope.findPost();
 	/*
 		2. DELETE POST 
 		create a function that destroys the post, adds an alert that the post has been 
@@ -57,5 +58,4 @@ app.controller('PostCtrl', function($scope,Post,users,$stateParams, $state) {
 		});
 	};
 
-	$scope.findPost();
 })
