@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
 });
 
 // add necessary dependencies 
-app.controller('PostCtrl', function($scope,Post,users,$stateParams) {
+app.controller('PostCtrl', function($scope,Post,users,$stateParams, $state) {
 
 	/* 1. FIND POST
 		use state params to retrieve the post id and attach post object to scope 
@@ -25,10 +25,10 @@ app.controller('PostCtrl', function($scope,Post,users,$stateParams) {
 		console.log("searching for post: "+$stateParams.postId);
 		Post.find($stateParams.postId).then(function(data){
 			console.log(data);
+			$scope.post = data;
 			return data;
 		});
 	};
-
 	/*
 		2. DELETE POST 
 		create a function that destroys the post, adds an alert that the post has been 
@@ -38,24 +38,24 @@ app.controller('PostCtrl', function($scope,Post,users,$stateParams) {
 			console.log("deleting post: "+$stateParams.postId);
 			Post.destroy($stateParams.postId).then(function(data){
 				console.log(data);
+				$state.go('main');
 				return data;
+
 			});
 		};
-
 	/*
 		3. EDIT POST 
 		create a function that edits the post, adds an alert that the post has been 
 		successfully edited, and displays the edited post.  
 
 	*/
-
-	$scope.deletePost = function() {
+	$scope.editPost = function() {
 		console.log("updating post: "+$stateParams.postId);
-		Post.update($stateParams.postId).then(function(data){
+		Post.update($stateParams.postId, {}).then(function(data){
 			console.log(data);
 			return data;
 		});
-	}
-	$scope.deletePost();
+	};
 
+	$scope.findPost();
 })
